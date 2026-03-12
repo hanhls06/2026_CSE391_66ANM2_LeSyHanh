@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Form Đăng Ký</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:40px;
+}
+
+input{
+padding:6px;
+width:250px;
+}
+
+#strengthBar{
+height:8px;
+width:250px;
+background:#ddd;
+margin-top:5px;
+}
+
+#strength{
+height:100%;
+width:0%;
+}
+
+</style>
+
+</head>
+<body>
+
+<h2>Form đăng ký</h2>
+
+<form>
+
+<label>Họ và tên</label><br>
+<input id="fullname" maxlength="50">
+<div id="nameCount">0/50</div>
+
+<br><br>
+
+<label>Mật khẩu</label><br>
+
+<input id="password" type="password">
+<button type="button" id="toggle">👁</button>
+
+<div id="strengthBar">
+<div id="strength"></div>
+</div>
+
+</form>
+
+<script>
+
+const fullname=document.getElementById("fullname")
+const password=document.getElementById("password")
+
+const nameCount=document.getElementById("nameCount")
+
+const strength=document.getElementById("strength")
+
+fullname.oninput=function(){
+
+let len=this.value.length
+nameCount.innerText=len+"/50"
+
+}
+
+password.oninput=function(){
+
+let pass=this.value
+
+let score=0
+
+if(pass.length>=8) score++
+if(/[A-Z]/.test(pass)) score++
+if(/[0-9]/.test(pass)) score++
+
+if(score==1){
+
+strength.style.width="33%"
+strength.style.background="red"
+
+}
+
+else if(score==2){
+
+strength.style.width="66%"
+strength.style.background="orange"
+
+}
+
+else if(score==3){
+
+strength.style.width="100%"
+strength.style.background="green"
+
+}
+
+else{
+
+strength.style.width="0%"
+
+}
+
+}
+
+document.getElementById("toggle").onclick=function(){
+
+if(password.type==="password"){
+
+password.type="text"
+
+}else{
+
+password.type="password"
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
